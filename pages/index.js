@@ -1,9 +1,11 @@
 import React from 'react'
+import { client } from '../lib/client'
+import { HeroBanner, Product, FooterBanner } from '../components'
 
 export default function Home() {
   return (
     <>
-      HeroBanner
+      <HeroBanner />
 
       <div className='products-heading'>
         <h2>Best Selling Products</h2>
@@ -14,7 +16,7 @@ export default function Home() {
         {['Product 1', 'Product 2'].map((product) => product)}
       </div>
 
-      Footer
+      <FooterBanner />
     </>
   )
 }
