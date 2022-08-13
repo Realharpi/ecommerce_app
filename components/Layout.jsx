@@ -7,15 +7,23 @@ import Footer from './Footer';
 const Layout = ({ children }) => {
   return (
     <div className="layout">
+
+      {/* Title of the Website. */}
       <Head>
-        <title>JS Mastery Store</title>
+        <title>Music Store</title>
       </Head>
+
+
       <header>
         <Navbar />
       </header>
+
+
       <main className="main-container">
         {children}
       </main>
+
+
       <footer>
         <Footer />
       </footer>
