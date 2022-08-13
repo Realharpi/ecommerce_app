@@ -7,9 +7,9 @@ const HeroBanner = ({ heroBanner }) => {
   return (
     <div className="hero-banner-container">
 
-
+    
       <div>
-      {/* Small Text */}
+        {/* Small Text */}
         <p className="beats-solo">{heroBanner.smallText}</p>
 
         {/* Medium Text */}
@@ -21,7 +21,7 @@ const HeroBanner = ({ heroBanner }) => {
         {/* Banner Image */}
         <img src={urlFor(heroBanner.image)} alt="headphones" className="hero-banner-image" />
 
-        {/* Button with a Link. */}
+        {/* "Show Now" Button with a Link. */}
         <div>
           <Link href={`/product/${heroBanner.product}`}>
             <button type="button">{heroBanner.buttonText}</button>
@@ -32,7 +32,7 @@ const HeroBanner = ({ heroBanner }) => {
             <h5>Description</h5>
             <p>{heroBanner.desc}</p>
           </div>
-          
+
         </div>
       </div>
     </div>

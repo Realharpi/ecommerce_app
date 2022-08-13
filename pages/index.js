@@ -6,7 +6,7 @@ import { Product, FooterBanner, HeroBanner } from '../components';
 const Home = ({ products, bannerData }) => (
   <div>
 
-  {/* Hero Banner. We are sending banner data as prop to HeroBanner component. */}
+    {/* Hero Banner. We are sending banner data as prop to HeroBanner component. */}
     <HeroBanner heroBanner={bannerData.length && bannerData[0]}  />
 
 
@@ -15,8 +15,11 @@ const Home = ({ products, bannerData }) => (
       <p>speaker There are many variations passages</p>
     </div>
 
+
     {/* Products Here */}
     <div className="products-container">
+    
+      {/* Mapping the product data and sending as props to product component. */}
       {products?.map((product) => <Product key={product._id} product={product} />)}
     </div>
 
@@ -25,11 +28,16 @@ const Home = ({ products, bannerData }) => (
   </div>
 );
 
-
-// We are fetching data from backend "Sanity"
 export const getServerSideProps = async () => {
   const query = '*[_type == "product"]';
   const products = await client.fetch(query);
+
+  const bannerQuery = '*[_type == "banner"]';
+  const bannerData = await client.fetch(bannerQuery);
+
+  return {
+    props: { products, bannerData }
+  }
 }
 
 export default Home;
