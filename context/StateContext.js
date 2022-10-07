@@ -16,21 +16,30 @@ export const StateContext = ({ children }) => {
   const onAdd = (product, quantity) => {
     const checkProductInCart = cartItems.find((item) => item._id === product._id);
     
+    // We update the Total price here. Previous Total price + Price + Quantity.
     setTotalPrice((prevTotalPrice) => prevTotalPrice + product.price * quantity);
+    // We update the Total Quantity here. 
     setTotalQuantities((prevTotalQuantities) => prevTotalQuantities + quantity);
     
+    // Here we will check the products in the cart, whether it exists or not.
     if(checkProductInCart) {
+      // if the product we are trying to add to the cart already exists in the cart, we will just increase it's quantity.
       const updatedCartItems = cartItems.map((cartProduct) => {
         if(cartProduct._id === product._id) return {
           ...cartProduct,
           quantity: cartProduct.quantity + quantity
         }
       })
-
+      // Here we are updating the Cart items.
       setCartItems(updatedCartItems);
+    
+
+    // if the product doesn't already exist then this will happen.
     } else {
+      // Quantity will be the quantity chosen by the user.
       product.quantity = quantity;
       
+      // Existing previous products (cart items) and new product.
       setCartItems([...cartItems, { ...product }]);
     }
 
@@ -46,7 +55,7 @@ export const StateContext = ({ children }) => {
     setCartItems(newCartItems);
   }
 
-  const toggleCartItemQuanitity = (id, value) => {
+  const toggleCartItemQuantity = (id, value) => {
     foundProduct = cartItems.find((item) => item._id === id)
     index = cartItems.findIndex((product) => product._id === id);
     const newCartItems = cartItems.filter((item) => item._id !== id)
@@ -64,10 +73,12 @@ export const StateContext = ({ children }) => {
     }
   }
 
+  // Increase Quantity
   const incQty = () => {
     setQty((prevQty) => prevQty + 1);
   }
 
+  // Decrease Quantity
   const decQty = () => {
     setQty((prevQty) => {
       if(prevQty - 1 < 1) return 1;
@@ -80,19 +91,19 @@ export const StateContext = ({ children }) => {
     <Context.Provider
       value={{
         showCart,
-        setShowCart,
         cartItems,
         totalPrice,
         totalQuantities,
         qty,
+        setShowCart,
+        setCartItems,
+        setTotalPrice,
+        setTotalQuantities,
         incQty,
         decQty,
         onAdd,
-        toggleCartItemQuanitity,
-        onRemove,
-        setCartItems,
-        setTotalPrice,
-        setTotalQuantities 
+        toggleCartItemQuantity,
+        onRemove
       }}
     >
       {children}
